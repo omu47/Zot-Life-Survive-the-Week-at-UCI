@@ -1,30 +1,4 @@
 let energy = 100;
-const energyDisplay = document.getElementById("energy");
-
-function makeChoice(action) {
-  if (action === "study") {
-    energy -= 30;
-    alert("You studied hard for midterms... 🧠📖");
-  } else if (action === "sleep") {
-    energy += 20;
-    alert("You feel refreshed after a good nap 😴");
-  } else if (action === "boba") {
-    energy += 10;
-    alert("That boba hit the spot! 🧋✨");
-  } else if (action === "canvas") {
-    energy -= 15;
-    alert("Canvas dropped a surprise quiz 😵‍💫");
-  }
-
-  if (energy > 100) energy = 100;
-  if (energy <= 0) {
-    alert("You burned out! Try again next week...");
-    energy = 100;
-  }
-
-  energyDisplay.textContent = energy;
-}
-
 let mood = 100;
 let weekDay = 1;
 
@@ -54,9 +28,27 @@ function makeChoice(choice) {
       break;
   }
 
+  // Keep values within bounds
+  if (energy > 100) energy = 100;
+  if (mood > 100) mood = 100;
+  
   weekDay++;
+  
+  // Update displays
+  document.getElementById("energy").textContent = energy;
+  document.getElementById("mood").textContent = mood;
+  
+  // Check for game over conditions
+  if (energy <= 0 || mood <= 0) {
+    message = "💀 You burned out! Starting a new week...";
+    weekDay = 7;
+  }
+  
   if (weekDay > 7) {
-    message += " 🎉 Week over!";
+    if (energy > 0 && mood > 0) {
+      message = "🎉 Week survived! You made it!";
+    }
+    weekDay = 7;
   }
 
   document.getElementById("status").innerText = `Day ${weekDay}/7 | Energy: ${energy} | Mood: ${mood}\n${message}`;
@@ -66,6 +58,8 @@ function startNewWeek() {
   energy = 100;
   mood = 100;
   weekDay = 1;
+  document.getElementById("energy").textContent = energy;
+  document.getElementById("mood").textContent = mood;
   document.getElementById("status").innerText = "New week started. Try to survive!";
 }
 
