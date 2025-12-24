@@ -46,7 +46,7 @@ function makeChoice(choice) {
   }
 
   // Clamp weekDay display to 7 for clarity
-  let displayDay = weekDay > 7 ? 7 : weekDay;
+  let displayDay = Math.min(weekDay, 7);
   document.getElementById("status").innerText = `Day ${displayDay}/7 | Energy: ${energy} | Mood: ${mood}\n${message}`;
 }
 
