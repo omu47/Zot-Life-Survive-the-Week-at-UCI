@@ -41,14 +41,8 @@ function makeChoice(choice) {
   // Check for game over conditions
   if (energy <= 0 || mood <= 0) {
     message = "💀 You burned out! Starting a new week...";
-    weekDay = 7;
-  }
-  
-  if (weekDay > 7) {
-    if (energy > 0 && mood > 0) {
-      message = "🎉 Week survived! You made it!";
-    }
-    weekDay = 7;
+  } else if (weekDay > 7) {
+    message = "🎉 Week survived! You made it!";
   }
 
   document.getElementById("status").innerText = `Day ${weekDay}/7 | Energy: ${energy} | Mood: ${mood}\n${message}`;
