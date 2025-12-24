@@ -45,7 +45,9 @@ function makeChoice(choice) {
     message = "🎉 Week survived! You made it!";
   }
 
-  document.getElementById("status").innerText = `Day ${weekDay}/7 | Energy: ${energy} | Mood: ${mood}\n${message}`;
+  // Clamp weekDay display to 7 for clarity
+  let displayDay = weekDay > 7 ? 7 : weekDay;
+  document.getElementById("status").innerText = `Day ${displayDay}/7 | Energy: ${energy} | Mood: ${mood}\n${message}`;
 }
 
 function startNewWeek() {
